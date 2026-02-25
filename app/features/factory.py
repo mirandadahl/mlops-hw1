@@ -1,15 +1,23 @@
 from typing import Dict, Any, List
 from .base import BaseFeatureGenerator
-from .generators import SpamFeatureGenerator, AverageWordLengthFeatureGenerator, EmailEmbeddingsFeatureGenerator, RawEmailFeatureGenerator
+from .generators import (
+    SpamFeatureGenerator,
+    AverageWordLengthFeatureGenerator,
+    EmailEmbeddingsFeatureGenerator,
+    RawEmailFeatureGenerator,
+    NonTextCharacterFeatureGenerator,
+)
 from app.dataclasses import Email
 
-# Constant list of available generators
+# Constant list of available generators (NonTextCharacterFeatureGenerator added)
 GENERATORS = {
     "spam": SpamFeatureGenerator,
     "word_length": AverageWordLengthFeatureGenerator,
     "email_embeddings": EmailEmbeddingsFeatureGenerator,
-    "raw_email": RawEmailFeatureGenerator
+    "raw_email": RawEmailFeatureGenerator,
+    "non_text_chars": NonTextCharacterFeatureGenerator,
 }
+
 
 class FeatureGeneratorFactory:
     """Factory for creating and managing feature generators"""
@@ -30,9 +38,20 @@ class FeatureGeneratorFactory:
             generator = generator_class()
             features = generator.generate_features(email)
             
-            # Prefix features with generator name to avoid conflicts
             for feature_name, value in features.items():
                 prefixed_name = f"{gen_name}_{feature_name}"
                 all_features[prefixed_name] = value
         
         return all_features
+
+    @classmethod
+    def get_available_generators(cls) -> List[Dict[str, Any]]:
+        """Return info about all available generators (for /features endpoint)"""
+        result = []
+        for name, gen_class in GENERATORS.items():
+            gen = gen_class()
+            result.append({
+                "name": name,
+                "features": gen.feature_names,
+            })
+        return result

@@ -1,3 +1,4 @@
+import re
 from typing import Dict, Any
 from .base import BaseFeatureGenerator
 from app.dataclasses import Email
@@ -122,3 +123,22 @@ class RawEmailFeatureGenerator(BaseFeatureGenerator):
 # 
 # Hint: Use email.subject and email.body to access the text
 # Hint: You can use regex or string methods to count non-alphanumeric characters
+class NonTextCharacterFeatureGenerator(BaseFeatureGenerator):
+    """Counts non-alphanumeric characters (punctuation, symbols, etc.) in email content.
+    
+    This completes Lab Assignment Part 1 of 2.
+    """
+    
+    def generate_features(self, email: Email) -> Dict[str, Any]:
+        subject = email.subject
+        body = email.body
+        all_text = f"{subject} {body}"
+        
+        # Count characters that are not alphanumeric and not whitespace
+        non_text_char_count = len(re.findall(r'[^a-zA-Z0-9\s]', all_text))
+        
+        return {"non_text_char_count": non_text_char_count}
+    
+    @property
+    def feature_names(self) -> list[str]:
+        return ["non_text_char_count"]
