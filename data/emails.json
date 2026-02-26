@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "id": 1,
+    "subject": "MLOps Update",
+    "body": "Class will be cancelled tonight",
+    "ground_truth": "School"
+  },
+  {
+    "id": 2,
+    "subject": "MLOps Update",
+    "body": "Class will be cancelled tonight",
+    "ground_truth": "School"
+  },
+  {
+    "id": 3,
+    "subject": "Race Schedule",
+    "body": "Races will be hosted on 1/12, 1/16, 2/1, 2/14",
+    "ground_truth": "ski team"
+  },
+  {
+    "id": 4,
+    "subject": "Race Schedule",
+    "body": "Races will be hosted on 1/12, 1/16, 2/1, 2/14",
+    "ground_truth": "ski team"
+  },
+  {
+    "id": 5,
+    "subject": "Team Practice Update",
+    "body": "Practice for the ski team is rescheduled to 2 PM",
+    "ground_truth": null
+  },
+  {
+    "id": 6,
+    "subject": "Hi",
+    "body": "Just reaching out to say hello and I miss you!",
+    "ground_truth": ""
+  }
+]

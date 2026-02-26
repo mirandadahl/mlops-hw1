@@ -13,5 +13,11 @@
   },
   "support": {
     "description": "Customer support, help requests, and technical issues"
+  },
+  "ski team": {
+    "description": "Team related emails around coaching, Race, Scheduling, Practice, Athletes"
+  },
+  "school": {
+    "description": "Education and class related email, grades, tests, course meeting updates"
   }
 }
